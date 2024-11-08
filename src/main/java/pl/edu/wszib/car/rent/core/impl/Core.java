@@ -3,13 +3,13 @@ package pl.edu.wszib.car.rent.core.impl;
 import pl.edu.wszib.car.rent.authentication.impl.Authenticator;
 import pl.edu.wszib.car.rent.authentication.IAuthenticator;
 import pl.edu.wszib.car.rent.core.ICore;
-import pl.edu.wszib.car.rent.db.ICarRepository;
-import pl.edu.wszib.car.rent.db.impl.CarRepository;
+import pl.edu.wszib.car.rent.db.IVehicleRepository;
+import pl.edu.wszib.car.rent.db.impl.VehicleRepository;
 import pl.edu.wszib.car.rent.gui.impl.GUI;
 import pl.edu.wszib.car.rent.gui.IGUI;
 
 public class Core implements ICore {
-    private ICarRepository carRepository = CarRepository.getInstance();
+    private IVehicleRepository vehicleRepository = VehicleRepository.getInstance();
     private IGUI gui = GUI.getInstance();
     private IAuthenticator authenticator = Authenticator.getInstance();
     private static final Core instance = new Core();
@@ -28,10 +28,10 @@ public class Core implements ICore {
         while (running) {
             switch (this.gui.showMenuAndReadChoice()) {
                 case "1":
-                    this.gui.listCars(this.carRepository.getCars());
+                    this.gui.listVehicles();
                     break;
                 case "2":
-                    this.gui.showResultMessage(this.carRepository.rentCar(this.gui.readPlate()));
+                    this.gui.showResultMessage(this.vehicleRepository.rentVehicle(this.gui.readPlate()));
                     break;
                 case "3":
                     running = false;

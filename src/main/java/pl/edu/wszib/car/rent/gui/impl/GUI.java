@@ -1,14 +1,19 @@
 package pl.edu.wszib.car.rent.gui.impl;
 
+import pl.edu.wszib.car.rent.db.IVehicleRepository;
+import pl.edu.wszib.car.rent.db.impl.VehicleRepository;
 import pl.edu.wszib.car.rent.gui.IGUI;
 import pl.edu.wszib.car.rent.model.Car;
+import pl.edu.wszib.car.rent.model.Truck;
 import pl.edu.wszib.car.rent.model.User;
+import pl.edu.wszib.car.rent.model.Vehicle;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class GUI implements IGUI {
     private Scanner scanner = new Scanner(System.in);
+    private final IVehicleRepository vehicleRepository = VehicleRepository.getInstance();
 
     private static GUI instance = new GUI();
 
@@ -17,19 +22,17 @@ public class GUI implements IGUI {
 
     @Override
     public String showMenuAndReadChoice() {
-        System.out.println("1. List cars");
-        System.out.println("2. Rent car");
+        System.out.println("1. List vehicles");
+        System.out.println("2. Rent vehicle");
         System.out.println("3. Exit");
 
         return scanner.nextLine();
     }
 
     @Override
-    public void listCars(List<Car> cars) {
-        for(Car car : cars) {
-            System.out.println(car.getBrand() + " " +
-                    car.getModel() + " " + car.getColor() + " " +
-                    car.getYear() + " " + car.getPlate() + " " + car.isRent());
+    public void listVehicles() {
+        for(Vehicle vehicle : vehicleRepository.getVehicles()) {
+            System.out.println(vehicle);
         }
     }
 
