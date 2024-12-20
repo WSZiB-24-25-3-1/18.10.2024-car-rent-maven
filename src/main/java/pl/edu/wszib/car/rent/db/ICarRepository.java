@@ -7,4 +7,7 @@ import java.util.List;
 public interface ICarRepository {
     boolean rentCar(String plate);
     List<Car> getCars();
+    default void persist(Car car) {
+        throw new UnsupportedOperationException();
+    }
 }

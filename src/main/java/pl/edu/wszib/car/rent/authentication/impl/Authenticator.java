@@ -1,13 +1,21 @@
 package pl.edu.wszib.car.rent.authentication.impl;
 
+import lombok.Getter;
 import org.apache.commons.codec.digest.DigestUtils;
 import pl.edu.wszib.car.rent.authentication.IAuthenticator;
-import pl.edu.wszib.car.rent.db.impl.UserRepository;
+import pl.edu.wszib.car.rent.db.IUserRepository;
+import pl.edu.wszib.car.rent.db.impl.sql.UserRepositorySQL;
 import pl.edu.wszib.car.rent.model.User;
 
+import java.util.Optional;
+
 public class Authenticator implements IAuthenticator {
+
+    @Getter
     private static Authenticator instance = new Authenticator();
-    private UserRepository userRepository = UserRepository.getInstance();
+
+    private IUserRepository userRepository = UserRepositorySQL.getInstance();
+
     private String seed = "sy2eL273fTUxQoH3Zlm7wM4ZzK3bR4Gh";
 
     private Authenticator() {
@@ -15,13 +23,9 @@ public class Authenticator implements IAuthenticator {
 
     @Override
     public boolean authenticate(User user) {
-        User userFromDb = this.userRepository.getUser(user.getLogin());
-        return userFromDb != null &&
-                userFromDb.getPassword()
+        Optional<User> userBox = this.userRepository.getUser(user.getLogin());
+        return userBox.isPresent() &&
+                userBox.get().getPassword()
                         .equals(DigestUtils.md5Hex(user.getPassword()+seed));
-    }
-
-    public static Authenticator getInstance() {
-        return instance;
     }
 }

@@ -6,6 +6,7 @@ import pl.edu.wszib.car.rent.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRepository implements IUserRepository {
     private List<User> users = new ArrayList<>();
@@ -13,9 +14,11 @@ public class UserRepository implements IUserRepository {
 
     private UserRepository() {
         this.users.add(new User(
+                1,
                 "admin",
                 DigestUtils.md5Hex("adminsy2eL273fTUxQoH3Zlm7wM4ZzK3bR4Gh")));
         this.users.add(new User(
+                2,
                 "janusz",
                 DigestUtils.md5Hex("janusz123sy2eL273fTUxQoH3Zlm7wM4ZzK3bR4Gh")));
     }
@@ -25,13 +28,13 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUser(String login) {
+    public Optional<User> getUser(String login) {
         for(User user : this.users) {
             if(user.getLogin().equals(login)) {
-                return user;
+                return Optional.of(user);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
