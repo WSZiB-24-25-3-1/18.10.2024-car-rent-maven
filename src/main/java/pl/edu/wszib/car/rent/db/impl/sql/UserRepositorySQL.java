@@ -1,6 +1,7 @@
 package pl.edu.wszib.car.rent.db.impl.sql;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 import pl.edu.wszib.car.rent.db.IUserRepository;
 import pl.edu.wszib.car.rent.model.User;
 
@@ -11,15 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class UserRepositorySQL implements IUserRepository {
-    @Getter
-    private static final UserRepositorySQL instance = new UserRepositorySQL();
 
     private final String GET_ALL_USERS_SQL = "select * from tuser";
     private final String GET_USER_BY_LOGIN_SQL = "select * from tuser where login = ?";
-
-    private UserRepositorySQL() {
-    }
 
     @Override
     public Optional<User> getUser(String login) {

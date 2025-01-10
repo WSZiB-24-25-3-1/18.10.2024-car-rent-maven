@@ -10,9 +10,8 @@ import lombok.extern.log4j.Log4j2;
 public class Truck extends Vehicle {
     private int capacity;
 
-    public Truck(String brand, String model, int year,
-                 String color, String plate, int capacity) {
-        super(brand, model, year, color, plate, false);
+    public Truck(int id, String brand, String model, int year, String color, String plate, int capacity) {
+        super(id, brand, model, year, color, plate, false);
         this.capacity = capacity;
     }
 

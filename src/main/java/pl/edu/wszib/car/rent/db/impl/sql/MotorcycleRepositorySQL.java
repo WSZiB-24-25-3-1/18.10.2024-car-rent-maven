@@ -1,6 +1,7 @@
 package pl.edu.wszib.car.rent.db.impl.sql;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 import pl.edu.wszib.car.rent.db.IMotorcycleRepository;
 import pl.edu.wszib.car.rent.model.Motorcycle;
 
@@ -10,18 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MotorcycleRepositorySQL implements IMotorcycleRepository {
-
-    @Getter
-    private final static MotorcycleRepositorySQL instance =
-            new MotorcycleRepositorySQL();
 
     private final String RENT_SQL = "UPDATE tmotorcycle SET rent = true WHERE plate = ? AND rent = false";
     private final String GET_ALL_SQL = "SELECT * FROM tmotorcycle";
 
-
-    private MotorcycleRepositorySQL() {
-    }
 
     @Override
     public boolean rent(String plate) {

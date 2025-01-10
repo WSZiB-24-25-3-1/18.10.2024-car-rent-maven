@@ -23,10 +23,10 @@ public class VehicleRepository implements IVehicleRepository {
         this.vehicles.add(new Car(4,"Mercedes",  "C",
                 2019,  "White",  "KR44"));
         this.vehicles.add(new Car(5,"Honda",  "Civic",
-                2020,  "Red",  "KR55"));
-        this.vehicles.add(new Truck("Volvo", "Super", 2021,
+                2020,  "Red", "KR55"));
+        this.vehicles.add(new Truck(6, "Volvo", "Super", 2021,
                 "Black", "KR666", 1000));
-        this.vehicles.add(new Truck("Scania", "Jakas", 2020,
+        this.vehicles.add(new Truck(7, "Scania", "Jakas", 2020,
                 "Black", "KR777", 800));
         this.vehicles.add(new Motorcycle(1,"Honda", "1000", 2010,
                 "Yellow", "KR8888", false));

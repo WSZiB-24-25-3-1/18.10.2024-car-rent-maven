@@ -1,6 +1,11 @@
 package pl.edu.wszib.car.rent.gui.impl;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import pl.edu.wszib.car.rent.db.IVehicleRepository;
 import pl.edu.wszib.car.rent.db.impl.sql.VehicleRepositorySQL;
 import pl.edu.wszib.car.rent.gui.IGUI;
@@ -9,17 +14,12 @@ import pl.edu.wszib.car.rent.model.Vehicle;
 
 import java.util.Scanner;
 
+@RequiredArgsConstructor
+@Component
 public class GUI implements IGUI {
 
-    @Getter
-    private static GUI instance = new GUI();
-
-    private final Scanner scanner = new Scanner(System.in);
-    private final IVehicleRepository vehicleRepository =
-            VehicleRepositorySQL.getInstance();
-
-    private GUI() {
-    }
+    private final Scanner scanner;
+    private final IVehicleRepository vehicleRepository;
 
     @Override
     public String showMenuAndReadChoice() {
